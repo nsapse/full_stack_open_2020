@@ -54,7 +54,7 @@ const App = () => {
       <Content part = {course.parts[0].name} exercises = {course.parts[0].exercises}/>  
       <Content part = {course.parts[1].name} exercises = {course.parts[1].exercises}/>  
       <Content part = {course.parts[2].name} exercises = {course.parts[2].exercises}/>  
-    <Footer exercises1 = {course.parts[0].exercises} exercises2 = {course.parts[1].exercises} exercises3 = {course.parts[2].exercises} />
+    <Footer exercises1 = {course.parts[0].exercises} exercises2 = {course.parts[1].exercises} exercises3 = {parts[2].exercises} />
     </div>
   );
 
