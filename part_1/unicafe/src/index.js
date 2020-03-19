@@ -39,6 +39,10 @@ const App = () => {
               <h1>Good: {good}</h1>
               <h1>Neutral: {neutral}</h1>
               <h1>Bad: {bad}</h1>
+              <h1>All: {good + bad + neutral}</h1>
+            <h1>Average Rating:  {(good * 1 + bad *-1 + neutral * 0) / (good + bad + neutral)}</h1>
+            <h1>Positive: {good /(good + bad + neutral) } </h1>
+            
           </div>
       </div>
 
