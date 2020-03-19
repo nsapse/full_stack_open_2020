@@ -15,19 +15,21 @@ import ReactDOM from "react-dom";
 // };
 
 const App = props => {
-  const Display = ({counter}) => <div>{counter}</div>  
-  const Button = (props) => {
-    return(
-      <button onClick={props.handleClick}>
-        {props.text}
-      </button>
-    )
-  }
+  const[left, setLeft] = useState(0)
+  const[right, setRight] = useState(0)
+  // const Display = ({counter}) => <div>{counter}</div>  
+  // const Button = (props) => {
+  //   return(
+  //     <button onClick={props.handleClick}>
+  //       {props.text}
+  //     </button>
+  //   )
   
-  const [counter, setCounter] = useState(0);
-  const increaseByOne = () => setCounter(counter + 1);
-  const decreaseByOne = () => setCounter(counter - 1); 
-  const setToZero = () =>  setCounter(0);  
+  
+  // const [counter, setCounter] = useState(0);
+  // const increaseByOne = () => setCounter(counter + 1);
+  // const decreaseByOne = () => setCounter(counter - 1); 
+  // const setToZero = () =>  setCounter(0);  
 
   // const handleClick = () => {
   //   console.log("clicked")
@@ -35,22 +37,33 @@ const App = props => {
 
   return (
     <div>
-      <Display counter = {counter}/>
-      <Button
-        handleClick = {increaseByOne}
-        text = 'plus'
-      />
-      <Button
-        handleClick = {setToZero}
-        text = 'zero'
-      />
-      <Button
-        handleClick = {decreaseByOne}
-        text = 'minus'
-      />
+      <div>
+        {left}
+        <button onClick={() => setLeft(left+1)}>
+          left
+        </button>
+        <button onClick={() => setRight(right+1)}>
+          right
+        </button>
+          {right}
+      </div>
     </div>
-  );
+    // <div>
+    //   <Display counter = {counter}/>
+    //   <Button
+    //     handleClick = {increaseByOne}
+    //     text = 'plus'
+    //   />
+    //   <Button
+    //     handleClick = {setToZero}
+    //     text = 'zero'
+    //   />
+    //   <Button
+    //     handleClick = {decreaseByOne}
+    //     text = 'minus'
+    //   />
+    // </div>
+  )
 };
 
-let counter = 1;
-ReactDOM.render(<App counter={counter} />, document.getElementById("root"));
+ReactDOM.render(<App/>, document.getElementById("root"));
