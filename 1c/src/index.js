@@ -15,9 +15,7 @@ import ReactDOM from "react-dom";
 // };
 
 const App = props => {
-  const Display = ({counter}) => {
-    return <div>{counter}</div>;
-  };
+  const Display = ({counter}) => <div>{counter}</div>  
   const Button = (props) => {
     return(
       <button onClick={props.handleClick}>
@@ -29,8 +27,7 @@ const App = props => {
   const [counter, setCounter] = useState(0);
   const increaseByOne = () => setCounter(counter + 1);
   const decreaseByOne = () => setCounter(counter - 1); 
-  const setToZero = () =>  setCounter(0);
-  
+  const setToZero = () =>  setCounter(0);  
 
   // const handleClick = () => {
   //   console.log("clicked")
@@ -56,5 +53,4 @@ const App = props => {
 };
 
 let counter = 1;
-
 ReactDOM.render(<App counter={counter} />, document.getElementById("root"));
