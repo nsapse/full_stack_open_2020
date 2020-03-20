@@ -11,17 +11,19 @@ const App = (props) => {
     const [selected, setSelected] = useState(0)
     const setToValue = (value) =>{
        setSelected(value)  
-    }  
-    
-const randInt = (max) => {
-  return Math.floor(Math.random * Math.floor(max)) 
-}
+    }
+     
+    const randQuote = (max) => {
+      return(
+        setToValue(Math.floor(Math.random()* max))        
+      ) 
+    }
 
     return (
     <div>
       {props.anecdotes[selected]}
       <p>
-      <Button text = "New Anecdote" handleClick = {() => setToValue(Math.floor(Math.random()*Math.floor(6)))} ></Button>
+      <Button text = "New Anecdote" handleClick = {() => randQuote(props.anecdotes.length)} ></Button>
       </p>
     </div>
   )
