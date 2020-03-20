@@ -3,13 +3,17 @@ import ReactDOM from "react-dom";
 
 // Creates a "statistic" component to display individual statistics
 const Statistic = prop => {
-    return (
-      <div>
-        <h1>
-          {prop.text} Feedback:   {prop.value}
-        </h1>
-      </div>
-    );
+    
+  return (
+    <table>
+      <tbody>
+        <tr>
+          <th>{prop.text} Feedback:</th>
+          <th>{String(prop.value)}</th>
+        </tr>
+      </tbody>
+    </table>
+  );
 };
 
 // A component to display all statistics for the page in a single div if and only if there has been user input
@@ -71,11 +75,23 @@ const App = () => {
       <Button onClick={handleNeutralClick} text="neutral"></Button>
       <Button onClick={handleGoodClick} text="good"></Button>
       {/* <Statistics good={good} bad={bad} neutral={neutral}></Statistics> */}
-      <Statistic text = "Good" value = {good}> </Statistic>
-      <Statistic text = 'Bad' value = {bad}> </Statistic>
-      <Statistic text = 'Neutral' value = {neutral}> </Statistic>
-      <Statistic text = 'Average' value = {(good * 1 + bad * -1 + neutral * 0) / (good + bad + neutral)}></Statistic>
-      <Statistic text = 'Positive' value = {(good) / (good + bad + neutral)*100}></Statistic>
+      <Statistic text="Good" value={good}>
+        {" "}
+      </Statistic>
+      <Statistic text="Bad" value={bad}>
+        {" "}
+      </Statistic>
+      <Statistic text="Neutral" value={neutral}>
+        {" "}
+      </Statistic>
+      <Statistic
+        text="Average"
+        value={(good * 1 + bad * -1 + neutral * 0) / (good + bad + neutral)}
+      ></Statistic>
+      <Statistic
+        text="Positive"
+        value={(good / (good + bad + neutral)) * 100}
+      ></Statistic>
     </div>
   );
 };
