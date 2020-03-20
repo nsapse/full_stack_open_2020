@@ -1,9 +1,32 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
+// Just a button component 
 const Button = ({ text, handleClick }) => {
   return <button onClick={handleClick}>{text}</button>;
 };
+// A component to display the anecdote with the most votes
+const Topdisplay = (props) => {
+  console.log(props)
+  // if (props.voteArray != undefined) {
+  // return <p>Hello, World</p>   
+  // }
+  // else{
+  //   return <p>No votes yet cast</p>
+  // }
+  const quoteArray = props.quoteArray
+  let voteArray = props.voteArray
+  let topVotes = Math.max(...voteArray)
+  console.log("topVotes is", topVotes)
+  let topQuote = voteArray.indexOf(topVotes)
+  return(
+    <div>    
+    <h1>Anecdote with the Most Votes</h1>
+    <p>{quoteArray[topQuote]}</p> 
+    <p>has {topVotes} votes</p>
+    </div>
+  ) 
+}
 
 const App = props => {
   // Sets the selected quote using the useState hook. Initialized at 0
@@ -52,6 +75,7 @@ const App = props => {
           handleClick={() => incrementPoints()}
         ></Button>
       </p>
+      <Topdisplay quoteArray = {props.anecdotes} voteArray = {points}></Topdisplay>
     </div>
   );
 };
