@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 const Part = (props) => {
   return (
     <p>
-      {props.part.name} {props.part.exercises}
+      {props.name} {props.exercises}
     </p>    
   )
 }
