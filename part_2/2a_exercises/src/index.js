@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Content from './components/Content'
+import Part from './components/Part'
 
 const Header = ({ course }) => {
   return (
@@ -12,24 +14,6 @@ const Total = ({ course }) => {
   return(
     <p>Number of exercises {sum}</p>
   ) 
-}
-
-const Part = (props) => {
-  return (
-    <p>
-      {props.part.name} {props.part.exercises}
-    </p>    
-  )
-}
-
-const Content = ({ course }) => {
-  return (
-    <div>
-      <Part part={course.parts[0]} />
-      <Part part={course.parts[1]} />
-      <Part part={course.parts[2]} />
-    </div>
-  )
 }
 
 const App = () => {
