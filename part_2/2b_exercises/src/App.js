@@ -27,6 +27,13 @@ const App = () => {
 
   const [number, setNumber] = useState('555-555-5555')
   
+  // A state to track the value of the filter input field (ie linked to controlled component)
+  
+  const [filter, setFilter] = useState('')
+
+  // a state to track whether or not all persons should be displayed
+
+  const [showAll, setShowAll] = useState(true)
   // Function to add new person objects (with associated numbers) to the persons array
   
   const addName  = (event) => {
@@ -66,7 +73,8 @@ const App = () => {
     setNewName('')
     } 
   }
-   
+    
+  //  const peopleToShow = showAll ? persons:persons.filter()
   // name input change handler
 
   const handleFormChange = (event) => {
@@ -78,15 +86,45 @@ const App = () => {
   const handleNumChange = (event) => {
     setNumber(event.target.value)
   }
+ 
+  // filter input change handler
+  // in addition to changing the filter state to match the input field updates the showAll 
+  // state to based on whether or not the user has entered information into the filter field indicating
+  // they want results to be filtered.
+
+  const handleFilter = (event) => {
+    setFilter(event.target.value)
+    // console.log('filter state value is: ', filter);
+    if (filter === ''){
+      setShowAll(true)
+    } 
+    else{
+      setShowAll(false)
+    }
+  }
+ 
+  // Const to track the group of people to be shown.
+  // When showAll state turns false (ie the filter field != '') returns the full persons state
+  // When showAll is true returns the persons state filtered for objects whose names contain the string stored
+  // in the current filter state.
+  // 
+  // The filter state and names are both transmuted to lower case to allow for case insensitivity.
+
+  
+ const personsToShow = showAll ? persons : persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
   
   // the JSX returned
+
   return (
     <div>
       {/* <div>debug: {newName} </div> */}
       <h2>Phonebook</h2>
       <div>
         Filter:
-        <input />
+        <input
+        value = {filter} 
+        onChange = {handleFilter}
+        />
       </div>
       <h2>Add New</h2>
       <form  onSubmit = {addName}>
@@ -111,7 +149,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-     {persons.map((person, i) => <p id = {i}>{person.name}: {person.number}</p>)}
+     {personsToShow.map((person, i) => <p id = {i}>{person.name}: {person.number}</p>)}
     </div>
   )
 }
