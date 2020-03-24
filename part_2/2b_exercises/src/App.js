@@ -15,10 +15,16 @@ const App = () => {
       date: new Date().toISOString(),
       id: persons.length + 1
     }
+    const found = persons.some(person => person.name.toLowerCase() === newObject.name.toLowerCase())  
+    if (found) {
+      alert(`${newObject.name} already in Phonebook`)
+    } 
+    else{
     setPersons(persons.concat(newObject))
+    setNewName('')
+    } 
   }
   const handleFormChange = (event) => {
-    // console.log('event.target.value for form is:', event.target.value);
     setNewName(event.target.value)
   }
  
