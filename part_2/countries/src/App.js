@@ -51,7 +51,7 @@ function App() {
        <h4>Find Countries</h4> 
        <input value = {filter} onChange = {handleFilter} type="text"/>
      </div>
-     <Display countries = {countries}></Display>
+     <Display countries = {countries.filter(country => country.name.toLowerCase().includes(filter.toLowerCase()))}></Display>
    </div>
 )
 }
