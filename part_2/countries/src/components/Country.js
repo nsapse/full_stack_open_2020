@@ -1,32 +1,21 @@
 import React from 'react'
 import { useState } from 'react'
+import FullCountry from './Full_Country'
 
 const Country = ({country, i}) => {
-      const [showFull, setShowFull] = useState(false)  
+      const [showFull, setShowFull] = useState(false) 
+  
+    //   The callback function to handle button clicks, reverses the value
+    // of the current showFull state.
       const buttonHandler = () => {
         return(
-            // console.log('Button Clicked')
           setShowFull(!showFull)
         )
       }
-            if (showFull === true) {
-                return(
-                <div id = {i}>
-                    <h1>{country.name}</h1>
-                    <button onClick = {buttonHandler}>Toggle Full</button>
-                    <p>Capital: {country.capital}</p>
-                    <p>Population: {country.population}</p>
-                    <h4>Languages</h4>
-                    <ul>
-                    {country.languages.map((language, i) => {
-                        return(
-                            <li id = {i}>{language.name}</li>
-                        )
-                    })}
-                    </ul>
-                    <img src={country.flag} alt=""/>
-                </div>
-                )
+            if (showFull === true){ 
+            return(
+                <FullCountry country = {country} i = {i} onClick = {buttonHandler}></FullCountry>
+            )
             }
             else{
                 return(

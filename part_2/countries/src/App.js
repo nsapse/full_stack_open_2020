@@ -13,20 +13,16 @@ function App() {
   
   // an application state to track the content of the controlled filter component
   const [filter, setFilter] = useState('enter a country')
-  
-  // an application state to track whether all or only some of the countries 
-  // should be displayed at a given time.
-  // const [showAll, setShowAll] = useState(true)
-  
+ 
   // The function to be called by useEffect below. 
   // Sets countries state to results of api call if successful
   const countryHook = () => {
-    console.log('Downloading list of countries');
+    // console.log('Downloading list of countries');
     axios
       .get('http://restcountries.eu/rest/v2/all')
       .then(response => {
         setCountries(response.data)
-        console.log(response);
+        // console.log(response);
         
       })
   }
