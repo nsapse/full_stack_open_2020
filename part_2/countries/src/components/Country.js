@@ -14,7 +14,10 @@ const Country = ({country, i}) => {
       }
             if (showFull === true){ 
             return(
-                <FullCountry country = {country} i = {i} onClick = {buttonHandler}></FullCountry>
+                <div>
+                  <button onClick = {buttonHandler}>Toggle Full</button>
+                  <FullCountry country = {country} i = {i} onClick = {buttonHandler}></FullCountry>
+                </div>
             )
             }
             else{

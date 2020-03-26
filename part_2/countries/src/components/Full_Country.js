@@ -22,7 +22,6 @@ const FullCountry = ({country, i, buttonHandler}) => {
     return(
     <div id = {i}>
         <h1>{country.name}</h1>
-        <button onClick = {buttonHandler}>Toggle Full</button>
         <p>Capital: {country.capital}</p>
         <p>Population: {country.population}</p>
         <h4>Languages</h4>
