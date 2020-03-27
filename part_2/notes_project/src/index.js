@@ -7,6 +7,11 @@ axios
   .get('http://localhost:3001/notes')
   .then(response => {
     const notes = response.data
+// const App = () => {
+//   return(
+//     <div>Hello, World</div>
+//   )
+// }
 
     ReactDOM.render(
     <App notes={notes} />,
