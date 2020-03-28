@@ -45,6 +45,18 @@
       "date": "2020-03-27T14:05:01.361Z",
       "important": false,
       "id": 7
+    },
+    {
+      "content": "New Note",
+      "date": "2020-03-28T20:33:13.558Z",
+      "important": true,
+      "id": 8
+    },
+    {
+      "content": "Newest note",
+      "date": "2020-03-28T21:06:04.829Z",
+      "important": false,
+      "id": 9
     }
   ]
 }
