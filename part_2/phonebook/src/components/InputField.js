@@ -1,9 +1,9 @@
 import React from 'react'
 
-const InputField = ({value, onChange}) => {
+const InputField = ({title, value, onChange}) => {
     return(
       <p>
-      number:
+      {title}:
       <input
       value = {value} 
       onChange = {onChange}
