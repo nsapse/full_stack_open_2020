@@ -131,12 +131,13 @@ const App = () => {
   
 const delPerson = id => {
   const person = persons.find(p => p.id === id)
-
-  bookService
-    .deleteInstance(id)
-    .then (responsePeople => {
-      setPersons(persons.filter(person => person.id !== id)) 
-    })
+    if (window.confirm(`Do you really want to delete ${person.name}?`)) {
+        bookService
+          .deleteInstance(id)
+          .then (responsePeople => {
+            setPersons(persons.filter(person => person.id !== id)) 
+          })
+      }
 }
 
   // the JSX returned
