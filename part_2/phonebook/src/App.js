@@ -67,12 +67,23 @@ const App = () => {
     // in the persons state (also converted to lower case). Returns a truish value if the name is found in the persons 
     // state. Falshish if not.
     
-    const found = persons.some(person => person.name.toLocaleLowerCase() === newObject.name.toLowerCase())  
+    const found = persons.find(person => person.name.toLocaleLowerCase() === newObject.name.toLowerCase())  
 
     // if found returns a Truish value (i.e the name is already in the persons state) alerts the users 
 
     if (found) {
-      alert(`${newObject.name} already in Phonebook`)
+      // alert(`${found.name} already in phonebook`)
+      if (window.confirm(`${found.name} is already in phonebook. Replace their old number with a new one?`)) {
+      bookService
+        .updatePerson(found.id, newObject)
+        .then(returnedPerson => {
+          const changedPersons = [...persons]
+          changedPersons[changedPersons.findIndex(person => person.id === found.id)] = returnedPerson
+          setPersons(changedPersons)
+          // console.log(changedPersons);
+          
+        })
+      }
     } 
     
     // if found returns a Falsish value (i.e the name is not already in the persons state) adds the new object to 
