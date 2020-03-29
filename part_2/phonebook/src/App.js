@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Display from './components/Display'
 import InputField from './components/InputField'
 import Filter from './components/Filter'
+import bookService from './services/phonebook'
 import axios from 'axios'
 
 const App = () => {
@@ -78,8 +79,12 @@ const App = () => {
     // the persons state.
 
     else{
-    setPersons(persons.concat(newObject))
-    setNewName('')
+    bookService
+      .create(newObject)
+      .then(response => {
+      setPersons(persons.concat(newObject))
+        setNewName('')
+      })
     } 
   }
     
