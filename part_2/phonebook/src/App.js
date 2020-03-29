@@ -127,7 +127,7 @@ const App = () => {
   // The filter state and names are both transmuted to lower case to allow for case insensitivity.
 
   
- const personsToShow = showAll ? persons : persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
+const personsToShow = showAll ? persons : persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
   
 const delPerson = id => {
   const person = persons.find(p => p.id === id)
@@ -157,7 +157,7 @@ const delPerson = id => {
         </div>
       </form>
       <h2>Numbers</h2>
-            {persons.map((person) => 
+            {personsToShow.map((person) => 
             <div>
               <Person
                 id = {person.id}
