@@ -12,13 +12,18 @@
     },
     {
       "name": "a new person",
-      "number": "555-555-5504",
+      "number": "555-555-5534",
       "id": 5
     },
     {
       "name": "Ryo B",
       "number": "91243u890125",
       "id": 6
+    },
+    {
+      "name": "John Lamb",
+      "number": "555-555-5555",
+      "id": 7
     }
   ]
 }

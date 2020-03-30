@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 import InputField from './components/InputField'
 import Filter from './components/Filter'
 import Person from './components/Person' 
+import Notification from './components/Notification'
 import bookService from './services/phonebook'
+import './index.css'
 import axios from 'axios'
 
 const App = () => {
@@ -25,13 +27,6 @@ const App = () => {
   
   useEffect(hook, [])
   
-  // State to control the name input field (ie linked to controlled component)
-  // initialized to string: 'a new person'
-  
-  const [ newName, setNewName ] = useState(
-    'a new person'
-  )
-
   // State to track phone number input field (ie linked to controlled component)
   // initialized to string: '555-555-5555' (an obviously fake number) 
 
@@ -44,8 +39,20 @@ const App = () => {
   // a state to track whether or not all persons should be displayed
 
   const [showAll, setShowAll] = useState(true)
-  // Function to add new person objects (with associated numbers) to the persons array
+ 
+  // a state to track the current user notification element
+
+  const [notification, setNotification] = useState(null)
+
+  // State to control the name input field (ie linked to controlled component)
+  // initialized to string: 'a new person'
   
+  const [ newName, setNewName ] = useState(
+    'a new person'
+    )
+  
+  // Function to add new person objects (with associated numbers) to the persons array
+    
   const addName  = (event) => {
 
     // Prevent the default behaviour of the called form (i.e. refreshing on submit)
@@ -69,8 +76,9 @@ const App = () => {
     
     const found = persons.find(person => person.name.toLocaleLowerCase() === newObject.name.toLowerCase())  
 
-    // if found returns a Truish value (i.e the name is already in the persons state) alerts the users 
-
+    // if found returns a Truish value (i.e the name is already in the persons state) alerts the user 
+    // that the phone number for the entry will be changed.
+    
     if (found) {
       // alert(`${found.name} already in phonebook`)
       if (window.confirm(`${found.name} is already in phonebook. Replace their old number with a new one?`)) {
@@ -81,6 +89,12 @@ const App = () => {
           changedPersons[changedPersons.findIndex(person => person.id === found.id)] = returnedPerson
           setPersons(changedPersons)
           // console.log(changedPersons);
+          setNotification(
+            `${returnedPerson.name}'s number changed to ${returnedPerson.number}`
+          )
+          setTimeout(() => {
+            setNotification(null)
+          }, 5000);
           
         })
       }
@@ -94,9 +108,14 @@ const App = () => {
       .create(newObject)
       .then(returnedPerson => {
       setPersons(persons.concat(returnedPerson))
-      console.log('newObject ID is', );
+      setNewName('')
+      setNotification(
+        `${newObject.name} added to the phonebook`
+      )
+      setTimeout(() => {
+        setNotification(null)
+    }, 5000);
       
-        setNewName('')
       })
     } 
   }
@@ -156,6 +175,7 @@ const delPerson = id => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notification}></Notification>
       <Filter value = {filter} onChange = {handleFilter} />
       <h2>Add New</h2>
       <form  onSubmit = {addName}>
