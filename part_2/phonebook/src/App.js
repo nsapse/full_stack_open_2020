@@ -97,6 +97,15 @@ const App = () => {
           }, 5000);
           
         })
+        .catch(error => {
+          setNotification(
+            `${found.name} has already been deleted from the server`
+          )
+          setTimeout(() => {
+            setNotification(null)
+          }, 5000);
+          setPersons(persons.filter(p => p.id !== found.id))
+        })
       }
     } 
     
