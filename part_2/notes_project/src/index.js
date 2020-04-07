@@ -5,7 +5,7 @@ import axios from 'axios'
 import './index.css'
 
 axios
-  .get('http://localhost:3001/notes')
+  .get('http://localhost:3001/api/notes')
   .then(response => {
     const notes = response.data
 // const App = () => {

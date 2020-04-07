@@ -2,7 +2,7 @@
 import Note from './components/Note'
 import noteService from './services/notes'
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 
 const Notification= ({ message }) => {
   if (message === null) {
