@@ -3,6 +3,7 @@ var cors = require('cors')
 var morgan = require('morgan')
 const app = express()
 app.use(morgan('short'))
+app.use(express.json())
 app.use(express.static('build'))
 app.use(cors())
 
@@ -39,7 +40,7 @@ app.delete('/api/notes/:id', (req, res) => {
 });
 
 const generateID = () => {
-    const maxId = note.length > 0
+    const maxId = notes.length > 0
     ? Math.max(...notes.map(n => n.id))
     : 0
     return maxId + 1
@@ -47,7 +48,7 @@ const generateID = () => {
 
 app.post('/api/notes', (req, res) => {
     const body = req.body
-
+    console.log(`req.body is ${body.content}`);
     if (!body.content) {
        return res.status(400).json({
            error: 'content missing'
