@@ -6,10 +6,10 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build:ui":"rm -rf build && cd ..\\..\\part_2\\notes_project\\ && npm run build  && cp -r build ..\\..\\part_3\\lesson_3a",
-    "deploy":"git push heroku master",
-    "deploy:full":"npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
-    "logs:prod":"heroku logs --tail",
+    "build:ui": "rm -rf build && cd ..\\..\\part_2\\notes_project\\ && npm run build  && cp -r build ..\\..\\part_3\\lesson_3a",
+    "deploy": "git push heroku master",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
+    "logs:prod": "heroku logs --tail",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Noah Sapse",
@@ -17,6 +17,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mongoose": "^5.9.7",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
