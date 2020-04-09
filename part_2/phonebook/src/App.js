@@ -19,8 +19,9 @@ const App = () => {
   
   const hook = () => {
     axios
-      .get('http://localhost:3001/persons')
+      .get('http://localhost:3001/api/persons')
       .then(response => {
+        console.log(`in useState Hook, response from 3001 is ${response}`);
         setPersons(response.data)
       })
   }
