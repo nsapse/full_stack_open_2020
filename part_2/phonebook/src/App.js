@@ -98,34 +98,37 @@ const App = () => {
           
         })
         .catch(error => {
-          setNotification(
-            `${found.name} has already been deleted from the server`
-          )
-          setTimeout(() => {
-            setNotification(null)
-          }, 5000);
-          setPersons(persons.filter(p => p.id !== found.id))
-        })
+            setNotification(
+              `${found.name} has already been deleted from the server`
+            )
+            setTimeout(() => {
+              setNotification(null)
+            }, 5000);
+            setPersons(persons.filter(p => p.id !== found.id))
+          })
+        }
       }
-    } 
-    
-    // if found returns a Falsish value (i.e the name is not already in the persons state) adds the new object to 
-    // the persons state.
 
-    else{
-    bookService
-      .create(newObject)
-      .then(returnedPerson => {
-      setPersons(persons.concat(returnedPerson))
-      setNewName('')
-      setNotification(
-        `${newObject.name} added to the phonebook`
-      )
-      setTimeout(() => {
-        setNotification(null)
-    }, 5000);
-      
-      })
+        // if found returns a Falsish value (i.e the name is not already in the persons state) adds the new object to 
+        // the persons state.
+        else {
+          bookService
+            .create(newObject)
+              .then(returnedPerson => {
+                  setPersons(persons.concat(returnedPerson))
+                })
+              .then(returnedPerson => { 
+                  setNewName('')
+                  setNotification(
+                    `${newObject.name} added to the phonebook`
+                  )
+                  setTimeout(() => {
+                    setNotification(null)
+                  }, 5000);}
+                )
+              .catch(error => {
+                setNotification(error.response.data)
+              })
     } 
   }
     
