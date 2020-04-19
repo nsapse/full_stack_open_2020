@@ -127,7 +127,7 @@ const App = () => {
                   }, 5000);}
                 )
               .catch(error => {
-                setNotification(error.response.data)
+                setNotification(error.message)
               })
     } 
   }
