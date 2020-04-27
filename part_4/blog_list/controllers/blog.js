@@ -12,7 +12,7 @@ blogRouter.post('/', async (request, response) => {
 
   const savedBlog = await blog_entry.save()
   response.status(201).json(savedBlog.toJSON());
-
+  
   })
 
 module.exports = blogRouter

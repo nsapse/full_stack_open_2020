@@ -91,6 +91,34 @@ test('a blog defaults to zero likes when posted without a value', async () => {
     expect(likes[2]).toBe(0)
 })
 
+test('posting blogs without a title will result in 400 "bad request" errors', async () => {
+    const newBlog = {
+          _id: "5a422b3a1b54a676234d17f9",
+          author: "Edsger W. Dijkstra",
+          url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+          likes: 12,
+          __v: 0
+      }
+      await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(400)
+})
+
+test('posting blogs without a url will result in 400 "bad request" errors', async () => {
+    const newBlog = {
+          _id: "5a422b3a1b54a676234d17f9",
+          author: "Edsger W. Dijkstra",
+          title: "Canonical string reduction",
+          likes: 12,
+          __v: 0
+      }
+      await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(400)
+})
+
 afterAll(() => {
     
     mongoose.connection.close()
