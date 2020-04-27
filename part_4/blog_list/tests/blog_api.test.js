@@ -73,6 +73,24 @@ test('a blog\'s id is defined as id', async () => {
     expect(response.body[0].id).toBeDefined()
 })
 
+test('a blog defaults to zero likes when posted without a value', async () => {
+    const newBlog = {
+          _id: "5a422b3a1b54a676234d17f9",
+          title: "Canonical string reduction",
+          author: "Edsger W. Dijkstra",
+          url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+      }
+      await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(201)
+        .expect('Content-Type', /application\/json/)
+
+    const response = await api.get('/api/blogs')
+    const likes = response.body.map(r => r.likes)
+    expect(likes[2]).toBe(0)
+})
+
 afterAll(() => {
     
     mongoose.connection.close()
