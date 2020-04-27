@@ -62,11 +62,18 @@ test('a blog can be posted', async () => {
         .expect('Content-Type', /application\/json/)
     
     const response = await api.get('/api/blogs')
-
-    const contents = response.body.map(r => r.contents)
+    const titles   = response.body.map( r => r.title)
+ 
     expect(response.body).toHaveLength(initialBlogs.length + 1)
+    expect(titles).toContain('Canonical string reduction')
  })
 
+test('a blog\'s id is defined as id', async () => {
+    const response = await api.get('/api/blogs/')
+    expect(response.body[0].id).toBeDefined()
+})
+
 afterAll(() => {
+    
     mongoose.connection.close()
 }) 
