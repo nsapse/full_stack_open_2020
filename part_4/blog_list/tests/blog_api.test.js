@@ -119,6 +119,17 @@ test('posting blogs without a url will result in 400 "bad request" errors', asyn
         .expect(400)
 })
 
+describe('When deleting blogs', () => {
+    test('A single blog  can be deleted', async () => {
+        await api.delete('/api/blogs/5a422a851b54a676234d17f7')
+            .expect(204)
+        
+        const response = await api.get('/api/blogs')
+        expect(response.body).toHaveLength(initialBlogs.length - 1)
+    })
+})
+
+
 afterAll(() => {
     
     mongoose.connection.close()
