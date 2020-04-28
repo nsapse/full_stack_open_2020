@@ -129,6 +129,17 @@ describe('When deleting blogs', () => {
     })
 })
 
+describe('when updating blog posts', () => {
+    test('the likes can be updated with a PUT request', async () => {
+        await api.put('/api/blogs/5a422a851b54a676234d17f7c')
+            .send({likes: 666})
+        
+        const response = await api.get('/api/blogs/5a422a851b54a676234d17f7')
+        console.log('response to get query: ', response.body);
+        expect(response.likes).toBe(666)
+    })
+})
+
 
 afterAll(() => {
     
