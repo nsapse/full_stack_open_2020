@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 content-type: application/json
 
 {
-    "title":"Using VSCODE REST",
+    "title":"Dijkstra's Algorithm",
     "author":"Noah Sapse",
     "url":"localhost:3001/api/blogs",
-    "likes":420
+    "likes": 69
 }
