@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const supertest = require('supertest')
+    const supertest = require('supertest')
 const app = require('../app')
 const Blog = require('../models/blog')
 
@@ -131,17 +131,16 @@ describe('When deleting blogs', () => {
 
 describe('when updating blog posts', () => {
     test('the likes can be updated with a PUT request', async () => {
-        await api.put('/api/blogs/5a422a851b54a676234d17f7c')
+        await api.put('/api/blogs/5a422a851b54a676234d17f7')
             .send({likes: 666})
         
         const response = await api.get('/api/blogs/5a422a851b54a676234d17f7')
         console.log('response to get query: ', response.body);
-        expect(response.likes).toBe(666)
+        expect(response.body.likes).toBe(666)
     })
 })
 
 
-afterAll(() => {
-    
+afterAll(() => { 
     mongoose.connection.close()
 }) 

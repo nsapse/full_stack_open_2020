@@ -8,7 +8,8 @@ const usersRouter = require('./controllers/users')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
-  
+mongoose.set('useFindAndModify', false)  
+
 const mongoUrl = config.MONGODB_URI 
 
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })

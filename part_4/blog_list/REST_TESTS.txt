@@ -29,7 +29,7 @@ POST http://localhost:3003/api/users
 content-type: application/json
 
 {
-    "username":"R2_D2",
+    "username":"R2",
     "name":"R2_D2",
     "password":"beep_boop"
 }
@@ -44,4 +44,21 @@ content-type: application/json
     "username":"Golden_Droid",
     "name":"C3P0",
     "password":"oh_my!"
+
+
 }
+
+###
+
+PUT http://localhost:3003/api/blogs/5e9e42d4a137cb44e0d6c7db
+content-type: application/json
+
+{
+    "likes":"6266"
+}
+
+###
+
+GET http://localhost:3003/api/blogs/5e9e42d4a137cb44e0d6c7db
+
+### 
