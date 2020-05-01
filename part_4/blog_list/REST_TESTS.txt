@@ -7,3 +7,18 @@ content-type: application/json
     "url":"localhost:3001/api/blogs",
     "likes": 69
 }
+
+### 
+
+POST http://localhost:3003/api/users 
+content-type: application/json
+
+{
+    "username":"Snorps",
+    "name":"Kylo Ren",
+    "password":"the empire did nothing wrong"
+}
+
+###
+
+GET http://localhost:3003/api/users
