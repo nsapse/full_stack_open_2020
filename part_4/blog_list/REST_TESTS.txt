@@ -14,11 +14,34 @@ POST http://localhost:3003/api/users
 content-type: application/json
 
 {
-    "username":"Snorps",
-    "name":"Kylo Ren",
-    "password":"the empire did nothing wrong"
+    "username":"the_senate",
+    "name":"Palpatine",
+    "password":"th"
 }
 
 ###
 
 GET http://localhost:3003/api/users
+
+### 
+
+POST http://localhost:3003/api/users 
+content-type: application/json
+
+{
+    "username":"R2_D2",
+    "name":"R2_D2",
+    "password":"beep_boop"
+}
+
+
+### 
+
+POST http://localhost:3003/api/users 
+content-type: application/json
+
+{
+    "username":"Golden_Droid",
+    "name":"C3P0",
+    "password":"oh_my!"
+}
