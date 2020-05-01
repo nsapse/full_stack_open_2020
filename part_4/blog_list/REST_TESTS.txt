@@ -62,3 +62,7 @@ content-type: application/json
 GET http://localhost:3003/api/blogs/5e9e42d4a137cb44e0d6c7db
 
 ### 
+
+GET http://localhost:3003/api/blogs/
+
+### 
