@@ -18,8 +18,18 @@ blogRouter.get('/:id', async (request, response) => {
     }
 })
 
+const getTokenFrom = request => {
+  const authorization = request.get('authorization')
+  if (authorization && authorization.toLowerCase().startsWith('bearer')) {
+    return authorization.substring(7)
+  } 
+  return null
+}
+
 blogRouter.post('/', async (request, response) => {
   const blog_entry = new Blog(request.body);
+  const token = getTokenFrom(request)
+  
   const users = await User.find({})
   const first_user = users[0]
   blog_entry.user = first_user
