@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
+mongoose.set('useFindAndModify', false)
 
 const userSchema = new mongoose.Schema({
     username:{
@@ -24,7 +25,6 @@ userSchema.set('toJSON', {
         delete returnedObject._id
         delete returnedObject.__v
         delete returnedObject.passwordHash
-        delete returnedObject.blogs
     }
 })
 

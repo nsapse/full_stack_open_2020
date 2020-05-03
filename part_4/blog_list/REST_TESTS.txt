@@ -44,10 +44,7 @@ content-type: application/json
     "username":"Golden_Droid",
     "name":"C3P0",
     "password":"oh_my!"
-
-
 }
-
 ###
 
 PUT http://localhost:3003/api/blogs/5e9e42d4a137cb44e0d6c7db
@@ -77,16 +74,14 @@ content-type: application/json
     "likes": 9000
 }
 
-### 
+###
 
-POST http://localhost:3003/api/blogs
+POST http://localhost:3003/api/login
 content-type: application/json
 
 {
-    "title":"Web Development with Express",
-    "author":"Noah Sapse",
-    "url":"localhost:3001/api/blogs",
-    "likes": 9000
+"username":"R2_D2",    
+"password":"beep_boop"
 }
 
 ### 
@@ -95,6 +90,20 @@ POST http://localhost:3003/api/login
 content-type: application/json
 
 {
-"username":"R2_D2",    
-"password":"beep_boop"
+"username":"Golden_Droid",    
+"password":"oh_my!"
+}
+
+###
+
+
+POST http://localhost:3003/api/blogs
+Content-Type: Application/Json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlIyX0QyIiwiaWQiOiI1ZWFjMzZkOWU3ZjdhYTA0OTEzZGQ3ZjMiLCJpYXQiOjE1ODg1MTQyMDF9.wx-Q13cPjaH0_SOuq0QeEuoThzfkKrE9zHL-X8308fk
+
+{
+    "title":"Debugging for Beginners",
+    "author":"Noah Sapse",
+    "url":"localhost:3001/api/blogs",
+    "likes":666
 }
