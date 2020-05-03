@@ -18,6 +18,7 @@ blogRouter.get('/:id', async (request, response) => {
       response.status(404).end()
     }
 })
+
 blogRouter.post('/', async (request, response) => {
   const body = request.body
   const token = request.token 
@@ -52,8 +53,33 @@ blogRouter.post('/', async (request, response) => {
 })
 
 blogRouter.delete('/:id', async (request, response) => {
-  await Blog.findByIdAndRemove(request.params.id)
+  const blog_entry = await Blog.findById(request.params.id)
+  console.log('the blog to be potentially deleted is', blog_entry);
+  const user_token = request.token
+  if (!user_token) {
+    return response.status(401).json({
+      error: 'token missing'
+    })
+  }
+  decodedToken = jwt.verify(user_token, process.env.SECRET)
+  if (!decodedToken.id) {
+    return response.status(401).json({
+      error: 'token ID invalid'
+    })
+  }
+  
+  if (blog_entry.user.toString() != decodedToken.id.toString()) {
+    return response.status(401).json({
+      error: 'improper user - notes can only be deleted by the user that created them'
+    })
+  }
+
+  const user = await User.findById(decodedToken.id)
+  await Blog.findByIdAndDelete(request.params.id)
+  user.blogs = user.blogs.filter(blog => blog.toString() != request.params.id)
+  await user.save() 
   response.status(204).end()
+
 })
 
 blogRouter.put('/:id', async (request, response) => {
