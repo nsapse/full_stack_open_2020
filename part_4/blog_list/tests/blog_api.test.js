@@ -1,38 +1,48 @@
 const mongoose = require('mongoose')
-    const supertest = require('supertest')
+const supertest = require('supertest')
 const app = require('../app')
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
 const api = supertest(app)
 
 const initialBlogs = [
-    {
-          _id: "5a422a851b54a676234d17f7",
-          title: "React patterns",
-          author: "Michael Chan",
-          url: "https://reactpatterns.com/",
-          likes: 7,
-          __v: 0
-      }, {
-          _id: "5a422aa71b54a676234d17f8",
+       {
           title: "Go To Statement Considered Harmful",
           author: "Edsger W. Dijkstra",
           url: "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
-          likes: 5,
-          __v: 0
+          likes: 5
         }
     ]
 
+const initialUsers = [
+    {
+    username: "root",
+    name: "root",
+    password:"password"
+}
+]
+
+let auth_token = ''
+let blog2_id = ''
 beforeEach(async () => {
 
     await Blog.deleteMany({})
-    
-    let blogObject = new Blog(initialBlogs[0])
-    await blogObject.save()
+    await User.deleteMany({})
 
-    blogObject = new Blog(initialBlogs[1])
-    await blogObject.save()
+    // let blogObject = new Blog(initialBlogs[0])
+    // await blogObject.save()
+
+    const new_user = await api.post('/api/users').send({username:initialUsers[0].username, password:initialUsers[0].password})
+    const login_response = await api.post('/api/login').send({username:initialUsers[0].username, password:initialUsers[0].password}) 
+    auth_token = 'Bearer ' + login_response.body.token
+    const blogObject = await api.post('/api/blogs').set('authorization', auth_token).send(initialBlogs[0])
+    blog2_id = blogObject.body.id;
+
 })
+
+
+
 
 test('blogs are returned as json', async () => {
     await api
@@ -48,15 +58,15 @@ test('all blogs are returned', async () => {
 
 test('a blog can be posted', async () => {
     const newBlog = {
-          _id: "5a422b3a1b54a676234d17f9",
           title: "Canonical string reduction",
           author: "Edsger W. Dijkstra",
           url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
-          likes: 12,
-          __v: 0
+          likes: 12
       }
+      
       await api
         .post('/api/blogs')
+        .set('authorization', auth_token)
         .send(newBlog)
         .expect(201)
         .expect('Content-Type', /application\/json/)
@@ -82,13 +92,14 @@ test('a blog defaults to zero likes when posted without a value', async () => {
       }
       await api
         .post('/api/blogs')
+        .set('Authorization', auth_token)
         .send(newBlog)
         .expect(201)
         .expect('Content-Type', /application\/json/)
 
     const response = await api.get('/api/blogs')
     const likes = response.body.map(r => r.likes)
-    expect(likes[2]).toBe(0)
+    expect(likes[1]).toBe(0)
 })
 
 test('posting blogs without a title will result in 400 "bad request" errors', async () => {
@@ -101,6 +112,7 @@ test('posting blogs without a title will result in 400 "bad request" errors', as
       }
       await api
         .post('/api/blogs')
+        .set('authorization', auth_token)
         .send(newBlog)
         .expect(400)
 })
@@ -115,13 +127,15 @@ test('posting blogs without a url will result in 400 "bad request" errors', asyn
       }
       await api
         .post('/api/blogs')
+        .set('authorization', auth_token)
         .send(newBlog)
         .expect(400)
 })
 
 describe('When deleting blogs', () => {
     test('A single blog  can be deleted', async () => {
-        await api.delete('/api/blogs/5a422a851b54a676234d17f7')
+        await api.delete(`/api/blogs/${blog2_id}`)
+        .set('authorization', auth_token)
             .expect(204)
         
         const response = await api.get('/api/blogs')
@@ -135,7 +149,6 @@ describe('when updating blog posts', () => {
             .send({likes: 666})
         
         const response = await api.get('/api/blogs/5a422a851b54a676234d17f7')
-        console.log('response to get query: ', response.body);
         expect(response.body.likes).toBe(666)
     })
 })

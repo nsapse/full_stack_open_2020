@@ -108,3 +108,61 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlIyX
     "url":"localhost:3001/api/blogs",
     "likes":666
 }
+
+###
+
+
+POST http://localhost:3003/api/blogs
+Content-Type: Application/Json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlIyX0QyIiwiaWQiOiI1ZWFjMzZkOWU3ZjdhYTA0OTEzZGQ3ZjMiLCJpYXQiOjE1ODg1MTQyMDF9.wx-Q13cPjaH0_SOuq0QeEuoThzfkKrE9zHL-X8308fk
+
+{
+    "title":"Debugging for Intermediates",
+    "author":"Noah Sapse",
+    "url":"localhost:3001/api/blogs",
+    "likes":666
+}
+    
+
+###
+
+
+DELETE http://localhost:3003/api/blogs/5eaecdc408d7070106068008
+Content-Type: Application/Json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlIyX0QyIiwiaWQiOiI1ZWFjMzZkOWU3ZjdhYTA0OTEzZGQ3ZjMiLCJpYXQiOjE1ODg1MTQyMDF9.wx-Q13cPjaH0_SOuq0QeEuoThzfkKrE9zHL-X8308fk
+
+###
+
+
+DELETE http://localhost:3003/api/blogs/5eaf0dfc5f307102dd44884e
+Content-Type: Application/Json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlIyX0QyIiwiaWQiOiI1ZWFjMzZkOWU3ZjdhYTA0OTEzZGQ3ZjMiLCJpYXQiOjE1ODg1MTQyMDF9.wx-Q13cPjaH0_SOuq0QeEuoThzfkKrE9zHL-X8308fk
+
+###
+
+DELETE http://localhost:3003/api/blogs/5eaece9ff38a1c011486bf77
+Content-Type: Application/Json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlIyX0QyIiwiaWQiOiI1ZWFjMzZkOWU3ZjdhYTA0OTEzZGQ3ZjMiLCJpYXQiOjE1ODg1MTQyMDF9.wx-Q13cPjaH0_SOuq0QeEuoThzfkKrE9zHL-X8308fk
+
+### 
+
+POST http://localhost:3003/api/users 
+content-type: application/json
+
+{
+    "username":"root",
+    "name":"root",
+    "password":"password"
+}
+
+###
+
+POST http://localhost:3003/api/login
+content-type: application/json
+
+{
+"username":"root",    
+"password":"password"
+}
+
+### 
