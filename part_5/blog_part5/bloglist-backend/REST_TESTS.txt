@@ -1,0 +1,168 @@
+POST http://localhost:3003/api/blogs
+content-type: application/json
+
+{
+    "title":"Dijkstra's Algorithm",
+    "author":"Noah Sapse",
+    "url":"localhost:3001/api/blogs",
+    "likes": 69
+}
+
+### 
+
+POST http://localhost:3003/api/users 
+content-type: application/json
+
+{
+    "username":"the_senate",
+    "name":"Palpatine",
+    "password":"th"
+}
+
+###
+
+GET http://localhost:3003/api/users
+
+### 
+
+POST http://localhost:3003/api/users 
+content-type: application/json
+
+{
+    "username":"R2",
+    "name":"R2_D2",
+    "password":"beep_boop"
+}
+
+
+### 
+
+POST http://localhost:3003/api/users 
+content-type: application/json
+
+{
+    "username":"Golden_Droid",
+    "name":"C3P0",
+    "password":"oh_my!"
+}
+
+###
+
+PUT http://localhost:3003/api/blogs/5e9e42d4a137cb44e0d6c7db
+content-type: application/json
+
+{
+    "likes":"6266"
+}
+
+###
+
+GET http://localhost:3003/api/blogs/5e9e42d4a137cb44e0d6c7db
+
+### 
+
+GET http://localhost:3003/api/blogs/
+
+### 
+
+POST http://localhost:3003/api/blogs
+content-type: application/json
+
+{
+    "title":"Web Development with Express",
+    "author":"Noah Sapse",
+    "url":"localhost:3001/api/blogs",
+    "likes": 9000
+}
+
+###
+
+POST http://localhost:3003/api/login
+content-type: application/json
+
+{
+"username":"R2_D2",    
+"password":"beep_boop"
+}
+
+### 
+
+POST http://localhost:3003/api/login
+content-type: application/json
+
+{
+"username":"Golden_Droid",    
+"password":"oh_my!"
+}
+
+###
+
+
+POST http://localhost:3003/api/blogs
+Content-Type: Application/Json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlIyX0QyIiwiaWQiOiI1ZWFjMzZkOWU3ZjdhYTA0OTEzZGQ3ZjMiLCJpYXQiOjE1ODg1MTQyMDF9.wx-Q13cPjaH0_SOuq0QeEuoThzfkKrE9zHL-X8308fk
+
+{
+    "title":"Debugging for Beginners",
+    "author":"Noah Sapse",
+    "url":"localhost:3001/api/blogs",
+    "likes":666
+}
+
+###
+
+
+POST http://localhost:3003/api/blogs
+Content-Type: Application/Json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlIyX0QyIiwiaWQiOiI1ZWFjMzZkOWU3ZjdhYTA0OTEzZGQ3ZjMiLCJpYXQiOjE1ODg1MTQyMDF9.wx-Q13cPjaH0_SOuq0QeEuoThzfkKrE9zHL-X8308fk
+
+{
+    "title":"Debugging for Intermediates",
+    "author":"Noah Sapse",
+    "url":"localhost:3001/api/blogs",
+    "likes":666
+}
+    
+
+###
+
+
+DELETE http://localhost:3003/api/blogs/5eaecdc408d7070106068008
+Content-Type: Application/Json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlIyX0QyIiwiaWQiOiI1ZWFjMzZkOWU3ZjdhYTA0OTEzZGQ3ZjMiLCJpYXQiOjE1ODg1MTQyMDF9.wx-Q13cPjaH0_SOuq0QeEuoThzfkKrE9zHL-X8308fk
+
+###
+
+
+DELETE http://localhost:3003/api/blogs/5eaf0dfc5f307102dd44884e
+Content-Type: Application/Json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlIyX0QyIiwiaWQiOiI1ZWFjMzZkOWU3ZjdhYTA0OTEzZGQ3ZjMiLCJpYXQiOjE1ODg1MTQyMDF9.wx-Q13cPjaH0_SOuq0QeEuoThzfkKrE9zHL-X8308fk
+
+###
+
+DELETE http://localhost:3003/api/blogs/5eaece9ff38a1c011486bf77
+Content-Type: Application/Json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlIyX0QyIiwiaWQiOiI1ZWFjMzZkOWU3ZjdhYTA0OTEzZGQ3ZjMiLCJpYXQiOjE1ODg1MTQyMDF9.wx-Q13cPjaH0_SOuq0QeEuoThzfkKrE9zHL-X8308fk
+
+### 
+
+POST http://localhost:3003/api/users 
+content-type: application/json
+
+{
+    "username":"root",
+    "name":"root",
+    "password":"password"
+}
+
+###
+
+POST http://localhost:3003/api/login
+content-type: application/json
+
+{
+"username":"root",    
+"password":"password"
+}
+
+### 
