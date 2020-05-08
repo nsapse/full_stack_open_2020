@@ -25,11 +25,20 @@ const App = () => {
      })
 
      setUser(user)
+     console.log('user set to :', user.username)
+     console.log('user of type:', typeof user.username)  
+     const properBlogs = blogs.filter(blog => blog.user !== undefined) 
+     const userBlogs = properBlogs.filter(blog => blog.user.username === user.username)
+     console.log('Userblogs now contains', userBlogs) 
+     userBlogs.forEach(blog => console.log(`blog posted by ${blog.user ? blog.user.username : "no user"}`))
+     
+     setBlogs(userBlogs)
      setUsername('')
      setPassword('')
-     console.log('logged in');
-    } catch (exception) {
-     console.log('User Attempted Login With Invalid Credentials');
+
+    }
+    catch (exception) {
+     console.log('User Attempted Login With Invalid Credentials')
     }
   }
   
@@ -62,6 +71,7 @@ const App = () => {
 const blogDisplay = () => (
     <div>
       <h2>Blogs</h2>
+      <h3>Posted By {user.name}</h3> 
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
