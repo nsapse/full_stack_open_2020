@@ -10,11 +10,21 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
+
+  useEffect(() => {
+    const loggedInUserJSON = window.localStorage.getItem('loggedInUser')
+    if (loggedInUserJSON) {
+      const user = JSON.parse(loggedInUserJSON)
+      setUser(user)
+    }
+  },[])
+
+
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
-    )  
-  }, [])
+    )}
+  , [])
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -24,15 +34,13 @@ const App = () => {
        username, password
      })
 
+     window.localStorage.setItem('loggedInUser', JSON.stringify(user))
+
      setUser(user)
-     console.log('user set to :', user.username)
-     console.log('user of type:', typeof user.username)  
-     const properBlogs = blogs.filter(blog => blog.user !== undefined) 
-     const userBlogs = properBlogs.filter(blog => blog.user.username === user.username)
-     console.log('Userblogs now contains', userBlogs) 
-     userBlogs.forEach(blog => console.log(`blog posted by ${blog.user ? blog.user.username : "no user"}`))
-     
-     setBlogs(userBlogs)
+    //  const properBlogs = blogs.filter(blog => blog.user !== undefined) 
+    //  const userBlogs = properBlogs.filter(blog => blog.user.username === user.username)
+    //  window.localStorage.setItem('loggedInBlogs', JSON.stringify(userBlogs))
+    //  setBlogs(userBlogs)
      setUsername('')
      setPassword('')
 
@@ -42,6 +50,13 @@ const App = () => {
     }
   }
   
+  const handleLogout = async (event) => {
+    event.preventDefault()
+    window.localStorage.removeItem('loggedInUser')
+    window.localStorage.removeItem('loggedInBlogs')
+    setUser(null)
+  }
+
   const loginForm = () => (
     <div>
       <h2>Login</h2>
@@ -68,15 +83,25 @@ const App = () => {
       </form>
     </div>
   )
+
+const logOutButton = () => (
+  <div>
+    <button onClick={handleLogout}>Logout</button> 
+  </div>
+)
+
 const blogDisplay = () => (
     <div>
       <h2>Blogs</h2>
+      {logOutButton()}
       <h3>Posted By {user.name}</h3> 
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
     </div>
 )
+
+
 
   return (
     <div>
