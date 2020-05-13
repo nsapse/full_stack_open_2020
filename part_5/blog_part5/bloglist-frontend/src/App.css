@@ -2,6 +2,12 @@
   text-align: center;
 }
 
+/* h2{
+  background-color: grey;
+  align-items: center;
+  color: purple;
+} */
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +41,34 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+h1 {
+    color: green;
+    font-style: italic;
+}
+.note {
+    color: grey;
+    padding-top: 3px;
+    font-size: 15px;
+}
+
+.error{
+    color: red;
+    background: lightgrey;    
+    font-size: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.success{
+    color:green;
+    background: lightgrey;    
+    font-size: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
 }
