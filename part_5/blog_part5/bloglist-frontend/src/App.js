@@ -5,6 +5,7 @@ import Notification from './components/Notification'
 import NewBlogForm from './components/NewBlogForm'
 import BlogDisplay from './components/BlogDisplay'
 import LogoutButton from './components/LogoutButton'
+import Toggleable from './components/Toggleable'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -108,22 +109,24 @@ const App = () => {
     }
   }
 
-const blogDisplay = () => (
+  const blogDisplay = () => (
     <BlogDisplay
-      handleLogout={handleLogout} 
+      handleLogout={handleLogout}
       blogs={blogs}
     >
-      <NewBlogForm 
-        title={title} 
-        author={author}
-        url={url}
-        handlePost={handlePost}
-        handleTitleChange={({ target }) => setTitle(target.value)}
-        handleAuthorChange={({ target }) => setAuthor(target.value)}
-        handleUrlChange={({ target }) => setUrl(target.value)}
-      />
+      <Toggleable buttonLabel="Add A New Blog">
+        <NewBlogForm
+          title={title}
+          author={author}
+          url={url}
+          handlePost={handlePost}
+          handleTitleChange={({ target }) => setTitle(target.value)}
+          handleAuthorChange={({ target }) => setAuthor(target.value)}
+          handleUrlChange={({ target }) => setUrl(target.value)}
+        />
+      </Toggleable>
     </BlogDisplay>
-)
+  )
 
   return (
     <div>
