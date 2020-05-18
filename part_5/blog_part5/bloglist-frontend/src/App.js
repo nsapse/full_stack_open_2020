@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
+import LoginForm from './components/loginForm'
+import Notification from './components/Notification'
+import NewBlogForm from './components/NewBlogForm'
+import BlogDisplay from './components/BlogDisplay'
+import LogoutButton from './components/LogoutButton'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -24,28 +29,6 @@ const App = () => {
     }
   },[])
 
-
-  const Notification = ({ message }) => {
-    if (message == null) {
-      return null
-    }
-    if (errorMessage) {
-      return (
-        <div className="error">
-          {message}
-        </div>
-      )
-    }
-    else if (successMessage) {
-      return (
-        <div className="success">
-          {message}
-        </div>
-      )
-    }
-  }
-
-
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
@@ -55,7 +38,6 @@ const App = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    console.log(`logging in with username: ${username} password: ${password}`);
     try {
      const user = await loginService.login({
        username, password
@@ -65,6 +47,12 @@ const App = () => {
 
      setUser(user)
      blogService.setToken(user.token)
+     setUsername('')
+     setPassword('')
+     setSuccessMessage(`Logged in as ${user.username}`)
+     setTimeout(() => {
+       setSuccessMessage(null)
+     }, 5000);
     // console.log(`user set to : ${user}`);
     // console.log(`user's token is ${user.token}`);
     
@@ -73,8 +61,6 @@ const App = () => {
     //  const userBlogs = properBlogs.filter(blog => blog.user.username === user.username)
     //  window.localStorage.setItem('loggedInBlogs', JSON.stringify(userBlogs))
     //  setBlogs(userBlogs)
-     setUsername('')
-     setPassword('')
 
     }
     catch (exception) {
@@ -93,121 +79,72 @@ const App = () => {
     setUser(null)
   }
 
-
-const logOutButton = () => (
-  <div>
-    <button onClick={handleLogout}>Logout</button> 
-  </div>
-)
-
-const loginForm = () => (
-    <div>
-        <h2>Login</h2>
-        <Notification message = {errorMessage}></Notification>
-        <form onSubmit={handleLogin}>
-            <div>
-                username:
-          <input
-                    type="text"
-                    value={username}
-                    name="Username"
-                    onChange={({ target }) => setUsername(target.value)}
-                />
-            </div>
-            <div>
-                password:
-          <input
-                    type="text"
-                    value={password}
-                    name="Password"
-                    onChange={({ target }) => setPassword(target.value)}
-                />
-            </div>
-            <button type="submit">login</button>
-        </form>
-    </div>
-)
-
   const handlePost = async (event) => {
     event.preventDefault()
-    console.log(`Creating new post with Author: ${author} and URL: ${url}`);
     const header = 'Authorization: Bearer ' + user.token
-    console.log(`Header is ${header}`)
     try {
       const newBlog = { title, author, url}
       const newObject = await blogService.create(newBlog)
+
+
+      setSuccessMessage(`Added ${newBlog.title} by ${newBlog.author}`)
+
       setBlogs(blogs.concat(newObject))
+
+      setTimeout(() => {
+        setSuccessMessage(null)
+      }, 5000);
+      
       setAuthor('')
       setTitle('')
       setUrl('')
-      setSuccessMessage('Blog Successfully Added')
-      setTimeout(() => {
-        setSuccessMessage(null) 
-      }, 5000)
+
     } catch (err) {
-      setErrorMessage('Addition of the new blog failed');
+      setErrorMessage('Addition of the new blog failed')
+
+      setTimeout(() => {
+        setErrorMessage(null) 
+      }, 5000)
     }
   }
 
-  const newBlogForm = () => (
-    <div>
-      <h2>Create New Blogs</h2>
-      <form onSubmit={handlePost}>
-        <div>
-          Title:
-  <input
-            type="text"
-            value={title}
-            name="Title"
-            onChange={({ target }) => setTitle(target.value)}
-          />
-        </div>
-        <div>
-          Author:
-  <input
-            type="text"
-            value={author}
-            name="Author"
-            onChange={({ target }) => setAuthor(target.value)}
-          />
-        </div>
-        <div>
-          url:
-  <input
-            type="text"
-            value={url}
-            name="url"
-            onChange={({ target }) => setUrl(target.value)}
-          />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  )
-
-
-
 const blogDisplay = () => (
-    <div>
-      <h2>Blogs</h2>
-      <Notification message={successMessage}></Notification>
-      {logOutButton()}
-      <h3>Posted Blogs</h3> 
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
-      {newBlogForm()}
-    </div>
+    <BlogDisplay
+      handleLogout={handleLogout} 
+      blogs={blogs}
+    >
+      <NewBlogForm 
+        title={title} 
+        author={author}
+        url={url}
+        handlePost={handlePost}
+        handleTitleChange={({ target }) => setTitle(target.value)}
+        handleAuthorChange={({ target }) => setAuthor(target.value)}
+        handleUrlChange={({ target }) => setUrl(target.value)}
+      />
+    </BlogDisplay>
 )
 
-
-
-return (
+  return (
     <div>
-    { user === null ?
-      loginForm() :
-      blogDisplay()
+      <div>
+        <Notification
+          successMessage={successMessage}
+          errorMessage={errorMessage}
+        />
+      </div>
+      <div>
+        {user === null ?
+          <LoginForm
+            username={username}
+            password={password}
+            handleUsernameChange={({ target }) => setUsername(target.value)}
+            handlePasswordChange={({ target }) => setPassword(target.value)}
+            handleLogin={handleLogin}
+          /> :
+          blogDisplay()
         }
+      </div>
     </div>
   )
 }
