@@ -19,7 +19,7 @@ const App = () => {
   const [url, setUrl] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
   const [successMessage, setSuccessMessage] = useState(null)
-
+  const blogFormRef = React.createRef()
 
   useEffect(() => {
     const loggedInUserJSON = window.localStorage.getItem('loggedInUser')
@@ -86,7 +86,7 @@ const App = () => {
     try {
       const newBlog = { title, author, url}
       const newObject = await blogService.create(newBlog)
-
+      blogFormRef.current.toggleVisibility()
 
       setSuccessMessage(`Added ${newBlog.title} by ${newBlog.author}`)
 
@@ -114,7 +114,7 @@ const App = () => {
       handleLogout={handleLogout}
       blogs={blogs}
     >
-      <Toggleable buttonLabel="Add A New Blog">
+      <Toggleable buttonLabel="Add A New Blog"  ref={blogFormRef}>
         <NewBlogForm
           title={title}
           author={author}
