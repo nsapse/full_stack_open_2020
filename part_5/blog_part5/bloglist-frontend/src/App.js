@@ -19,6 +19,7 @@ const App = () => {
   const [url, setUrl] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
   const [successMessage, setSuccessMessage] = useState(null)
+
   const blogFormRef = React.createRef()
 
   useEffect(() => {
@@ -54,15 +55,6 @@ const App = () => {
      setTimeout(() => {
        setSuccessMessage(null)
      }, 5000);
-    // console.log(`user set to : ${user}`);
-    // console.log(`user's token is ${user.token}`);
-    
-    
-    //  const properBlogs = blogs.filter(blog => blog.user !== undefined) 
-    //  const userBlogs = properBlogs.filter(blog => blog.user.username === user.username)
-    //  window.localStorage.setItem('loggedInBlogs', JSON.stringify(userBlogs))
-    //  setBlogs(userBlogs)
-
     }
     catch (exception) {
       console.log('login failed');
@@ -85,9 +77,8 @@ const App = () => {
     const header = 'Authorization: Bearer ' + user.token
     try {
       const newBlog = { title, author, url}
-      const newObject = await blogService.create(newBlog)
       blogFormRef.current.toggleVisibility()
-
+      const newObject = await blogService.create(newBlog)
       setSuccessMessage(`Added ${newBlog.title} by ${newBlog.author}`)
 
       setBlogs(blogs.concat(newObject))
@@ -114,7 +105,7 @@ const App = () => {
       handleLogout={handleLogout}
       blogs={blogs}
     >
-      <Toggleable buttonLabel="Add A New Blog"  ref={blogFormRef}>
+      <Toggleable buttonLabel="Add A New Blog" ref={blogFormRef}>
         <NewBlogForm
           title={title}
           author={author}
