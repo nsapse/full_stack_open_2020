@@ -3,7 +3,7 @@ import LogoutButton from './LogoutButton'
 import Blog from './Blog'
 
 const BlogDisplay = (props) => {
-  const sortedBlogs = props.blogs.sort((a,b) => (a.likes > b.likes) ? -1 : 1)
+  const sortedBlogs = props.blogs.sort((blogOne,blogTwo) => (blogOne.likes > blogTwo.likes) ? -1 : 1)
   return(
     <div>
       <h2>Blogs</h2>
