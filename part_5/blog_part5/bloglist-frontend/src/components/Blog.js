@@ -1,13 +1,10 @@
 import React, {useState} from 'react'
 import blogService from '../services/blogs'
 
-const Blog = ({blog, deleteEntry}) => {
+const Blog = ({blog, deleteEntry, incrementLikes}) => {
   const [full, setFull] = useState(false)  
   const currentUser= JSON.parse(window.localStorage.getItem('loggedInUser')).username
   const showDelete = blog.user.username === currentUser    
-  console.log('currentUser', currentUser);
-  console.log('showDelete: ', showDelete);
-  
    
   const flipFullState = () => {
     setFull(!full)
@@ -23,24 +20,6 @@ const Blog = ({blog, deleteEntry}) => {
     marginBottom: 5
   }
 
-  const incrementLikes = async () => {
-    try {
-      const modificationid = blog.id
-      console.log('modificationid reading a', modificationid);
-      const updatedlikes = blog.likes + 1
-      console.log('updated likes', updatedlikes);
-      const updatedblog = {
-        ...blog,
-        likes: updatedlikes
-      }
-      const returnedblog = await blogService.update(modificationid, updatedblog)
-      blog = returnedblog
-      console.log('blog now looks like: ', blog);
-    } catch (err) {
-      console.log('the note could not be updated');
-    }
-  }
-   
   if (full) {
    return(
      <div style={blogStyle}>
@@ -50,7 +29,7 @@ const Blog = ({blog, deleteEntry}) => {
          <p>
            {`Likes: ${blog.likes}`}
          </p>
-         <button onClick={incrementLikes}>Like</button>
+         <button onClick={() => incrementLikes(blog.id)}>Like</button>
        </div>
         <p>{`${blog.user.username}`}</p>
         <button onClick={flipFullState} >Hide Full</button>
