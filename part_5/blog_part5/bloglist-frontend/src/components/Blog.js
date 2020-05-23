@@ -13,7 +13,7 @@ const Blog = ({blog, deleteEntry}) => {
     setFull(!full)
   }
 
-  const deleteVisible = {display: showDelete ? '' : 'none'}
+  const deleteVisible = {display: showDelete ? '' : 'none'
 
   const blogStyle = {
     paddingTop: 10,
