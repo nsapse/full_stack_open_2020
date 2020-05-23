@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import Blog from './components/Blog'
 import LoginForm from './components/loginForm'
 import Notification from './components/Notification'
 import NewBlogForm from './components/NewBlogForm'
 import BlogDisplay from './components/BlogDisplay'
-import LogoutButton from './components/LogoutButton'
 import Toggleable from './components/Toggleable'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -30,13 +27,6 @@ const App = () => {
       blogService.setToken(user.token)
     }
   },[])
-
-  useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )}
-  , [])
-
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -81,7 +71,7 @@ const App = () => {
       const newObject = await blogService.create(newBlog)
       setSuccessMessage(`Added ${newBlog.title} by ${newBlog.author}`)
 
-      setBlogs(blogs.concat(newObject))
+      // setBlogs(blogs.concat(newObject))
 
       setTimeout(() => {
         setSuccessMessage(null)
@@ -103,7 +93,6 @@ const App = () => {
   const blogDisplay = () => (
     <BlogDisplay
       handleLogout={handleLogout}
-      blogs={blogs}
     >
       <Toggleable buttonLabel="Add A New Blog" ref={blogFormRef}>
         <NewBlogForm

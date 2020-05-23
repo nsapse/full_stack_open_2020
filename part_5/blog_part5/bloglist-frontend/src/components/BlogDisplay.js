@@ -10,7 +10,7 @@ const BlogDisplay = (props) => {
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs(blogs.sort((blogOne,blogTwo) => (blogOne.likes > blogTwo.likes) ? -1 : 1))
-    )},[])
+    )})
 
   const deleteEntry = async (id) => {
     const confirmation = window.confirm("Are you sure you want to delete this post")
@@ -34,7 +34,6 @@ const BlogDisplay = (props) => {
               deleteEntry={deleteEntry}
               />
       )}
-      {/* {NewBlogForm()} */}
       <div className="blog_form">
         {props.children}
       </div>

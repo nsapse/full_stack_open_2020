@@ -13,7 +13,7 @@ const Blog = ({blog, deleteEntry}) => {
     setFull(!full)
   }
 
-  const deleteVisible = {display: showDelete ? '' : 'none'
+  const deleteVisible = {display: showDelete ? '' : 'none'}
 
   const blogStyle = {
     paddingTop: 10,
@@ -25,19 +25,19 @@ const Blog = ({blog, deleteEntry}) => {
 
   const incrementLikes = async () => {
     try {
-      const modificationID = blog.id
-      console.log('ModificationID reading a', modificationID);
-      const updatedLikes = blog.likes + 1
-      console.log('Updated Likes', updatedLikes);
-      const updatedBlog = {
+      const modificationid = blog.id
+      console.log('modificationid reading a', modificationid);
+      const updatedlikes = blog.likes + 1
+      console.log('updated likes', updatedlikes);
+      const updatedblog = {
         ...blog,
-        likes: updatedLikes
+        likes: updatedlikes
       }
-      const returnedBlog = await blogService.update(modificationID, updatedBlog)
-      blog = returnedBlog
-      console.log('Blog now looks like: ', blog);
+      const returnedblog = await blogService.update(modificationid, updatedblog)
+      blog = returnedblog
+      console.log('blog now looks like: ', blog);
     } catch (err) {
-      console.log('The note could not be updated');
+      console.log('the note could not be updated');
     }
   }
    
