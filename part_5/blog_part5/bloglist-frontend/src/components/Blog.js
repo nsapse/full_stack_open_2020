@@ -1,11 +1,19 @@
 import React, {useState} from 'react'
 import blogService from '../services/blogs'
 
-const Blog = ({ blog }) => {
+const Blog = ({blog, deleteEntry}) => {
   const [full, setFull] = useState(false)  
+  const currentUser= JSON.parse(window.localStorage.getItem('loggedInUser')).username
+  const showDelete = blog.user.username === currentUser    
+  console.log('currentUser', currentUser);
+  console.log('showDelete: ', showDelete);
+  
+   
   const flipFullState = () => {
     setFull(!full)
   }
+
+  const deleteVisible = {display: showDelete ? '' : 'none'}
 
   const blogStyle = {
     paddingTop: 10,
@@ -32,15 +40,6 @@ const Blog = ({ blog }) => {
       console.log('The note could not be updated');
     }
   }
-  
-  const deleteEntry = async () => {
-    const confirmation = window.confirm("Are you sure you want to delete this post")
-    const targetID = blog.id
-    if(confirmation) {
-          blogService.deleteOne(targetID)
-    }
-    return null
-  }
    
   if (full) {
    return(
@@ -55,7 +54,7 @@ const Blog = ({ blog }) => {
        </div>
         <p>{`${blog.user.username}`}</p>
         <button onClick={flipFullState} >Hide Full</button>
-        <button onClick={deleteEntry}>Delete Blog Entry</button>
+        <button style={deleteVisible} onClick={() => deleteEntry(blog.id)}>Delete Blog Entry</button>
      </div>
    ) 
   }
