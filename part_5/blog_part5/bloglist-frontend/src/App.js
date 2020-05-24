@@ -31,30 +31,30 @@ const App = () => {
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
-     const user = await loginService.login({
-       username, password
-     })
+      const user = await loginService.login({
+        username, password
+      })
 
-     window.localStorage.setItem('loggedInUser', JSON.stringify(user))
+      window.localStorage.setItem('loggedInUser', JSON.stringify(user))
 
-     setUser(user)
-     blogService.setToken(user.token)
-     setUsername('')
-     setPassword('')
-     setSuccessMessage(`Logged in as ${user.username}`)
-     setTimeout(() => {
-       setSuccessMessage(null)
-     }, 5000);
+      setUser(user)
+      blogService.setToken(user.token)
+      setUsername('')
+      setPassword('')
+      setSuccessMessage(`Logged in as ${user.username}`)
+      setTimeout(() => {
+        setSuccessMessage(null)
+      }, 5000)
     }
     catch (exception) {
-      console.log('login failed');
+      console.log('login failed')
       setErrorMessage('Wrong username or password')
       setTimeout(() => {
-        setErrorMessage(null) 
-      }, 5000);
+        setErrorMessage(null)
+      }, 5000)
     }
   }
-  
+
   const handleLogout = async (event) => {
     event.preventDefault()
     window.localStorage.removeItem('loggedInUser')
@@ -64,9 +64,8 @@ const App = () => {
 
   const handlePost = async (event) => {
     event.preventDefault()
-    const header = 'Authorization: Bearer ' + user.token
     try {
-      const newBlog = { title, author, url}
+      const newBlog = { title, author, url }
       blogFormRef.current.toggleVisibility()
       const newObject = await blogService.create(newBlog)
       setSuccessMessage(`Added ${newBlog.title} by ${newBlog.author}`)
@@ -75,8 +74,8 @@ const App = () => {
 
       setTimeout(() => {
         setSuccessMessage(null)
-      }, 5000);
-      
+      }, 5000)
+
       setAuthor('')
       setTitle('')
       setUrl('')
@@ -85,7 +84,7 @@ const App = () => {
       setErrorMessage('Addition of the new blog failed')
 
       setTimeout(() => {
-        setErrorMessage(null) 
+        setErrorMessage(null)
       }, 5000)
     }
   }
