@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 const NoteForm = ({ createNote }) => {
   const [newNote, setNewNote] = useState('')
@@ -10,26 +10,26 @@ const NoteForm = ({ createNote }) => {
   const addNote = (event) => {
     event.preventDefault()
     createNote({
-        content: newNote,
-        important: Math.random() > .5,
+      content: newNote,
+      important: Math.random() > .5,
     })
-    
+
     setNewNote('')
   }
 
-   return (
-       <div>
-           <h2>Create a New Note</h2>
+  return (
+    <div className="formDiv">
+      <h2>Create a New Note</h2>
 
-           <form onSubmit={addNote}>
-               <input 
-                    value = {newNote}
-                    onChange = {handleChange}
-                />
-                <button type="submit">Save</button>
-           </form>
-       </div>
-   ) 
+      <form onSubmit={addNote}>
+        <input
+          value = {newNote}
+          onChange = {handleChange}
+        />
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  )
 }
 
 export default NoteForm

@@ -3,7 +3,8 @@ import blogService from '../services/blogs'
 
 const Blog = ({ blog, deleteEntry, incrementLikes }) => {
   const [full, setFull] = useState(false)
-  const currentUser= JSON.parse(window.localStorage.getItem('loggedInUser')).username
+  const loggedInUser= JSON.parse(window.localStorage.getItem('loggedInUser'))
+  const currentUser = loggedInUser ? loggedInUser.username : ''
   const showDelete = blog.user.username === currentUser
 
   const flipFullState = () => {
@@ -22,7 +23,7 @@ const Blog = ({ blog, deleteEntry, incrementLikes }) => {
 
   if (full) {
     return(
-      <div style={blogStyle}>
+      <div style={blogStyle} className="fullBlog">
         <p>{`${blog.title} by ${blog.author}`}</p>
         <p>{`URL: ${blog.url}`}</p>
         <div>
@@ -39,7 +40,7 @@ const Blog = ({ blog, deleteEntry, incrementLikes }) => {
   }
   else {
     return(
-      <div>
+      <div className="minBlog">
         {blog.title} {blog.author}
         <button onClick={flipFullState} >View Full</button>
       </div>

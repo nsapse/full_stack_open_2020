@@ -10,8 +10,8 @@ import NoteForm from './components/NoteForm'
 
 const Notification= ({ message }) => {
   if (message === null) {
-    return null 
-  } 
+    return null
+  }
   return (
     <div className = "error">
       {message}
@@ -28,7 +28,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [loginVisible, setloginVisible] = useState(false)
-  
+
   const noteFormRef = React.createRef()
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const App = () => {
         setNotes(initialNotes)
       })
   },
-   [])
+  [])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
@@ -46,12 +46,12 @@ const App = () => {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
       noteService.setToken(user.token)
-    } 
+    }
   },[])
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    console.log('logging in with', username, password);
+    console.log('logging in with', username, password)
     try {
       const user = await loginService.login({
         username, password,
@@ -71,18 +71,18 @@ const App = () => {
       setErrorMessage('Wrong Credentials')
       setTimeout(() => {
         setErrorMessage(null)
-      }, 5000);
+      }, 5000)
     }
   }
-   
+
 
   const toggleImportanceOf = (id) => {
     const note = notes.find(n => n.id === id)
-    const changedNote = {...note, important: !note.important}
+    const changedNote = { ...note, important: !note.important }
 
     noteService
       .update(id, changedNote)
-      .then(returnedNote=> {
+      .then(returnedNote => {
         setNotes(notes.map(note => note.id !== id ? note : returnedNote))
       })
       .catch(error => {
@@ -94,7 +94,7 @@ const App = () => {
         }, 5000)
         setNotes(notes.filter(n => n.id !== id ))
       })
-    
+
   }
 
   const noteForm = () => (
@@ -102,7 +102,7 @@ const App = () => {
       <NoteForm createNote={addNote} />
     </Toggleable>
   )
- 
+
   const addNote = (noteObject) => {
     noteFormRef.current.toggleVisibility()
     noteService
@@ -112,14 +112,14 @@ const App = () => {
       })
   }
 
-  
+
   const notesToShow = showAll
     ? notes
     : notes.filter(note => note.important === true)
 
   const loginForm = () => {
-    const hideWhenvisible = {display: loginVisible ? 'none' : ''}
-    const showWhenVisible = {display: loginVisible ? '' : 'none'}
+    const hideWhenvisible = { display: loginVisible ? 'none' : '' }
+    const showWhenVisible = { display: loginVisible ? '' : 'none' }
 
     return (
       <div>
@@ -127,20 +127,20 @@ const App = () => {
           <button onClick={() => setloginVisible(true) }>Log In</button>
         </div>
         <div style={showWhenVisible}>
-            <LoginForm
-                username = {username}
-                password = {password}
-                handleUsernameChange = {({ target }) => setUsername(target.value)} 
-                handlePasswordChange = {({ target }) => setPassword(target.value)} 
-                handleSubmit={handleLogin}
-            />
-            <button onClick={() => setloginVisible(false)}>cancel</button>
+          <LoginForm
+            username = {username}
+            password = {password}
+            handleUsernameChange = {({ target }) => setUsername(target.value)}
+            handlePasswordChange = {({ target }) => setPassword(target.value)}
+            handleSubmit={handleLogin}
+          />
+          <button onClick={() => setloginVisible(false)}>cancel</button>
         </div>
       </div>
     )
   }
-  
-   
+
+
 
   return (
     <div>
