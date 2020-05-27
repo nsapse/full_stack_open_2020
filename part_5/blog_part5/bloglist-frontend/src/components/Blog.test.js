@@ -30,7 +30,7 @@ beforeEach(() => {
   )
 })
 
-test('renders its title, and author but not URL, when minimized', () => {
+test('A blog renders its title, and author but not URL, when minimized', () => {
   expect(component.container).toHaveTextContent(
     'Test Blog'
   )
@@ -41,7 +41,7 @@ test('renders its title, and author but not URL, when minimized', () => {
     'http://localhost.com/test_url'
   )
 })
-test('shows its url and likes when expanded', () => {
+test('A blog shows its url and likes when expanded', () => {
   // component.debug()
   const button = component.getByText('Expand')
   fireEvent.click(button)
@@ -51,6 +51,13 @@ test('shows its url and likes when expanded', () => {
   expect(component.container).toHaveTextContent(
     'Likes: 420'
   )
-  // component.debug()
-  
 })
+test('The like button fires when clicked', () => {
+  const expandButton = component.getByText('Expand')
+  fireEvent.click(expandButton)
+  const likeButton = component.getByText('Like')
+  fireEvent.click(likeButton)
+  fireEvent.click(likeButton)
+  expect(incrementLikes.mock.calls).toHaveLength(2)
+})
+
