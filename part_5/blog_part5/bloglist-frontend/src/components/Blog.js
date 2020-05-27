@@ -24,7 +24,7 @@ const Blog = ({ blog, deleteEntry, incrementLikes }) => {
   if (full) {
     return(
       <div style={blogStyle} className="fullBlog">
-        <p>{`${blog.title} by ${blog.author}`}</p>
+        <p className="titleHeader">{`${blog.title} by ${blog.author}`}</p>
         <p>{`URL: ${blog.url}`}</p>
         <div>
           <p>
@@ -42,7 +42,7 @@ const Blog = ({ blog, deleteEntry, incrementLikes }) => {
     return(
       <div className="minBlog">
         {blog.title} {blog.author}
-        <button onClick={flipFullState} >View Full</button>
+        <button onClick={flipFullState}> View Full</button>
       </div>
     )
   }
