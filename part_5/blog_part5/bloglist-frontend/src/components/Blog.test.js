@@ -21,24 +21,36 @@ const blog = {
 const deleteEntry = jest.fn()
 const incrementLikes = jest.fn()
 
-const component = render(
-  <Blog blog={blog} deleteEntry={deleteEntry} incrementLikes={incrementLikes}>
-  </Blog>
-)
-describe('A blog', () => {
-  test('Renders its title, and author but not URL, when minimized', () => {
-    expect(component.container).toHaveTextContent(
-      'Test Blog'
-    )
-    expect(component.container).toHaveTextContent(
-      'Test Author'
-    )
-    expect(component.container).not.toHaveTextContent(
-      'http://localhost.com/test_url'
-    )
-  })
+let component
 
+beforeEach(() => {
+  component = render(
+    <Blog blog={blog} deleteEntry={deleteEntry} incrementLikes={incrementLikes}>
+    </Blog>
+  )
 })
 
-
-
+test('renders its title, and author but not URL, when minimized', () => {
+  expect(component.container).toHaveTextContent(
+    'Test Blog'
+  )
+  expect(component.container).toHaveTextContent(
+    'Test Author'
+  )
+  expect(component.container).not.toHaveTextContent(
+    'http://localhost.com/test_url'
+  )
+})
+test('shows its url and likes when expanded', () => {
+  // component.debug()
+  const button = component.getByText('Expand')
+  fireEvent.click(button)
+  expect(component.container).toHaveTextContent(
+    'http://localhost.com/test_url'
+  )
+  expect(component.container).toHaveTextContent(
+    'Likes: 420'
+  )
+  // component.debug()
+  
+})

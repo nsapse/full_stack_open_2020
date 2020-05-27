@@ -42,7 +42,9 @@ const Blog = ({ blog, deleteEntry, incrementLikes }) => {
     return(
       <div className="minBlog">
         {blog.title} {blog.author}
-        <button onClick={flipFullState}> View Full</button>
+        <button className="expandButton" onClick={flipFullState}>
+          Expand
+        </button>
       </div>
     )
   }
