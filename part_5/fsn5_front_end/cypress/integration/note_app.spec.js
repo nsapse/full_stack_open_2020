@@ -37,7 +37,7 @@ describe('Note App', function () {
   describe('When logged in', function () {
     beforeEach(function () {
       cy.login({ username: 'mluukkai', password: 'salainen' })
-      
+
       cy.createNote({
         content: 'a new note cypress',
         important: false
@@ -56,5 +56,21 @@ describe('Note App', function () {
       cy.contains('a new note cypress')
         .contains('make not important')
     })
+    describe('and several notes exist', function() {
+      beforeEach(function() {
+        cy.createNote({ content: 'first note' , important: false })
+        cy.createNote({ content: 'second note' , important: false })
+        cy.createNote({ content: 'third note' , important: false })
+      })
+      it('a single note out of many can be marked as important', function() {
+        cy.contains('second note')
+          .contains('make important')
+          .click()
+
+        cy.contains('second note')
+          .contains('make not important')
+      })
+    })
+
   })
 })
