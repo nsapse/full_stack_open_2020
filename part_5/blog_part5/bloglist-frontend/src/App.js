@@ -70,7 +70,7 @@ const App = () => {
       const newObject = await blogService.create(newBlog)
       setSuccessMessage(`Added ${newBlog.title} by ${newBlog.author}`)
 
-      setBlogs(blogs.concat(newObject))
+      // setBlogs(blogs.concat(newObject))
 
       setTimeout(() => {
         setSuccessMessage(null)
