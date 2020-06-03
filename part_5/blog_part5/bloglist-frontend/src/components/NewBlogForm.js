@@ -26,7 +26,7 @@ const NewBlogForm = ({
       <div>
           Author:
         <input
-          id='Author	'
+          id='Author'	
           type="text"
           value={author}
           name="Author"
