@@ -10,9 +10,9 @@ describe('Blog App', function() {
   describe('When a valid user exists in the database', function()  {
     beforeEach(function(){
       const user = {
-        username: "Test", 
-        name: "Test",
-        password: "Test"
+        username: 'Test',
+        name: 'Test',
+        password: 'Test'
       }
       cy.request('POST', 'http://localhost:3003/api/users', user)
       cy.visit('http://localhost:3000')
@@ -29,6 +29,18 @@ describe('Blog App', function() {
       cy.contains('login').click()
       cy.contains('Wrong username or password')
     })
+    describe('When Logged in', () => {
+      beforeEach(function(){
+        cy.login({ username: 'Test', password:'Test' })
+      })
+      it('a new note can be created', function() {
+        cy.contains('Add A New Blog').click()
+        cy.get('#Title').type('Test Post')
+        cy.get('#Author').type('Test Author')
+        cy.get('#Url').type('http://test:url')
+        cy.contains('Submit').click()
+        cy.contains('Added Test Post by Test Author')
+      })
+    })
   })
-  
 })
