@@ -14,7 +14,13 @@ describe('Blog App', function() {
         name: 'Test',
         password: 'Test'
       }
+      const user2 = {
+        username: 'Test2',
+        name: 'Test2',
+        password: 'Test2'
+      }
       cy.request('POST', 'http://localhost:3003/api/users', user)
+      cy.request('POST', 'http://localhost:3003/api/users', user2)
       cy.visit('http://localhost:3000')
     })
     it('A user can login with proper credentials', function(){
@@ -50,6 +56,17 @@ describe('Blog App', function() {
           cy.contains('Likes: 0')
           cy.get('#likeButton').click()
           cy.contains('Likes: 1')
+        })
+        it('The user who posted it can delete it', function(){
+          cy.contains('Expand').click()
+          cy.get('#deleteButton').click()
+          cy.get('html').should('not.contain', 'Test Title')
+        })
+        it('a user who did not make the note cannot delete it', function(){
+          cy.contains('Logout').click()
+          cy.login({ username: 'Test2', password:'Test2' })
+          cy.contains('Expand').click()
+          cy.get('.fullBlog').should('not.contain', '#deleteButton')
         })
       })
 

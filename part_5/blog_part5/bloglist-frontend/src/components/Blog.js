@@ -34,7 +34,7 @@ const Blog = ({ blog, deleteEntry, incrementLikes }) => {
         </div>
         <p>{`${blog.user.username}`}</p>
         <button onClick={flipFullState} >Hide Full</button>
-        <button style={deleteVisible} onClick={() => deleteEntry(blog.id)}>Delete Blog Entry</button>
+        <button style={deleteVisible} id="deleteButton" onClick={() => deleteEntry(blog.id)}>Delete Blog Entry</button>
       </div>
     )
   }
