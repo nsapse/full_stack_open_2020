@@ -30,7 +30,7 @@ const Blog = ({ blog, deleteEntry, incrementLikes }) => {
           <p>
             {`Likes: ${blog.likes}`}
           </p>
-          <button onClick={() => incrementLikes(blog.id)}>Like</button>
+          <button id="likeButton" onClick={() => incrementLikes(blog.id)}>Like</button>
         </div>
         <p>{`${blog.user.username}`}</p>
         <button onClick={flipFullState} >Hide Full</button>

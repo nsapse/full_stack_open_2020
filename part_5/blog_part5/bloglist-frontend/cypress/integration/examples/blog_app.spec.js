@@ -46,7 +46,10 @@ describe('Blog App', function() {
           cy.post({title: 'Test Title', author: 'Test Author', url:'Test Url'})
         })
         it('the note can be liked', function(){
-          cy.contains()
+          cy.contains('Expand').click()
+          cy.contains('Likes: 0')
+          cy.get('#likeButton').click()
+          cy.contains('Likes: 1')
         })
       })
 
