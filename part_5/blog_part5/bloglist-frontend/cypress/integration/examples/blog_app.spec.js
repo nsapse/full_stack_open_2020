@@ -41,6 +41,15 @@ describe('Blog App', function() {
         cy.contains('Submit').click()
         cy.contains('Added Test Post by Test Author')
       })
+      describe('and a note exists', function() {
+        beforeEach(function(){
+          cy.post({title: 'Test Title', author: 'Test Author', url:'Test Url'})
+        })
+        it('the note can be liked', function(){
+          cy.contains()
+        })
+      })
+
     })
   })
 })

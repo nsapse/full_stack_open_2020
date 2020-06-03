@@ -31,13 +31,11 @@ Cypress.Commands.add('login', ({ username, password }) => {
     localStorage.setItem('loggedInUser', JSON.stringify(body))
     cy.visit('http://localhost:3000')
   })
+
+Cypress.Commands.add('post', ({title, author, url}) => {
+  cy.request('POST', 'http://localhost:3003/api/blogs', {
+    title, author, url 
+  }).then( () => cy.visit('http://localhost:3000'))
 })
 
-
-
-
-
-
-
-
-
+})
