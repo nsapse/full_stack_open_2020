@@ -47,9 +47,9 @@ describe('Blog App', function() {
         cy.contains('Submit').click()
         cy.contains('Added Test Post by Test Author')
       })
-      describe('and a note exists', function() {
+      describe('and when a note exists', function() {
         beforeEach(function(){
-          cy.post({title: 'Test Title', author: 'Test Author', url:'Test Url'})
+          cy.post({ title: 'Test Title', author: 'Test Author', url:'Test Url' })
         })
         it('the note can be liked', function(){
           cy.contains('Expand').click()
@@ -69,7 +69,6 @@ describe('Blog App', function() {
           cy.get('.fullBlog').should('not.contain', '#deleteButton')
         })
       })
-
     })
   })
 })

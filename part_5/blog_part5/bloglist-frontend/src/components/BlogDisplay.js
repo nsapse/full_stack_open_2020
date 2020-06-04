@@ -6,7 +6,7 @@ import Blog from './Blog'
 const BlogDisplay = (props) => {
 
   return(
-    <div>
+    <div id="blogDisplay">
       <h2>Blogs</h2>
       <LogoutButton handleLogout={props.handleLogout} />
       <h3>Posted Blogs</h3>
