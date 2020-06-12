@@ -6,7 +6,14 @@ export const notificationChange = notification => {
     }
 }
 
-const notificationReducer = (state='A Message Has Been Set', action) => {
+export const notificationClear = () => {
+    return {
+        type: 'SET_NOTIFICATION',
+        notification:''
+    }
+}
+
+const notificationReducer = (state='', action) => {
     switch (action.type) {
         case 'SET_NOTIFICATION':
             return action.notification 
