@@ -1,3 +1,6 @@
+import { notificationChange, notificationClear } from "./notificationReducer";
+import { useDispatch } from "react-redux";
+
 const anecdotesAtStart = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
