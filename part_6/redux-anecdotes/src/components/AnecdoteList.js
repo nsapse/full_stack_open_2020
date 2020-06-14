@@ -28,7 +28,13 @@ const AnecdoteList = () => {
       dispatch(notificationClear())
      }, 5000);
    }
-   const anecdotes = useSelector(state => state.anecdotes)
+   const anecdotes = useSelector(state => {
+     if (state.filter === 'ALL' || state.filter ==='') {
+       return state.anecdotes
+     }
+     return state.anecdotes.filter(anecdote => anecdote.content.toLowerCase().indexOf(state.filter.toLowerCase()) > -1 ) 
+   })
+
    const sortedAnecdotes = anecdotes.sort((a,b) => b.votes - a.votes)
 
    return (
