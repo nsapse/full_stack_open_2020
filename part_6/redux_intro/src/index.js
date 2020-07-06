@@ -7,8 +7,10 @@ import { createNote } from './reducers/noteReducer'
 import { filterChange } from './reducers/filterReducer'
 import { Provider } from 'react-redux'
 
-import noteReducer from './reducers/noteReducer'
+import noteReducer, { initializeNotes } from './reducers/noteReducer'
 import filterReducer from './reducers/filterReducer'
+
+import noteService from './services/notes'
 
 import './index.css';
 import App from './App';
@@ -23,6 +25,8 @@ const store = createStore(
   reducer,
   composeWithDevTools()
   )
+
+noteService.getAll().then(notes => store.dispatch(initializeNotes(notes)))
 
 store.subscribe(() => console.log(store.getState()))
 store.dispatch(filterChange('IMPORTANT'))
