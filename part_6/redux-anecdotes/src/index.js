@@ -5,14 +5,13 @@ import store from './store'
 import App from './App'
 import anecdoteService from './services/anecdotes'
 import AnecdoteForm from './components/AnecdoteForm'
+import { initializeAnecdotes } from './reducers/anecdoteReducer'
 
 // const dispatch = useDispatch()
 
-anecdoteService.getAll().then( anecdotes => { 
-  anecdotes.forEach(anecdote => {
-    store.dispatch({ type: 'NEW_ANECDOTE', data: anecdote})
-  });
- })
+// anecdoteService.getAll().then( anecdotes => 
+//   store.dispatch(initializeAnecdotes(anecdotes))
+//  )
 
 store.subscribe(() => console.log(store.getState()))
 
