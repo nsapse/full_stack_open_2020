@@ -1,10 +1,9 @@
-import React, { StrictMode } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom' ;
 
 import { createStore, combineReducers } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
 import { createNote } from './reducers/noteReducer'
-import { filterChange } from './reducers/filterReducer'
+// import { filterChange } from './reducers/filterReducer'
 import { Provider } from 'react-redux'
 
 import noteReducer, { initializeNotes } from './reducers/noteReducer'
@@ -22,18 +21,18 @@ const reducer = combineReducers({
 })
 
 const store = createStore(
-  reducer,
-  composeWithDevTools()
+  reducer
   )
 
+noteService.getAll().then(notes => store.dispatch(initializeNotes(notes)))
 
-noteService.getAll().then(notes =>
-    notes.forEach(note => {
-      store.dispatch({type: 'NEW_NOTE', data: note})
-    }))
+// noteService.getAll().then(notes =>
+//     notes.forEach(note => {
+//       store.dispatch({type: 'NEW_NOTE', data: note})
+//     }))
 
 store.subscribe(() => console.log(store.getState()))
-store.dispatch(filterChange('ALL'))
+// store.dispatch(filterChange('ALL'))
 store.dispatch(createNote('combineReducers creates one reducer from many simple reducers'))
 
 export default store

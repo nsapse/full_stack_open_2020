@@ -1,5 +1,5 @@
 const noteReducer = (state = [], action) => {
-  console.log('ACTION', action);
+  console.log('ACTION', action)
   switch (action.type) {
     case 'NEW_NOTE':
       return [...state, action.data]
@@ -37,13 +37,10 @@ export const initializeNotes = (notes) => {
 export const createNote = (content) => {
   return {
     type: 'NEW_NOTE',
-    data: {
-      content,
-      important: false,
-      id: generateId() 
-    }
+    data, 
   }
 }
+
 export const toggleImportanceOf = (id) => {
   return {
     type: 'TOGGLE_IMPORTANCE',
