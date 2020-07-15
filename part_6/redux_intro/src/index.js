@@ -26,11 +26,15 @@ const store = createStore(
   composeWithDevTools()
   )
 
-noteService.getAll().then(notes => store.dispatch(initializeNotes(notes)))
+
+noteService.getAll().then(notes =>
+    notes.forEach(note => {
+      store.dispatch({type: 'NEW_NOTE', data: note})
+    }))
 
 store.subscribe(() => console.log(store.getState()))
-store.dispatch(filterChange('IMPORTANT'))
-store.dispatch(createNote('combineReducers froms one reducer from many simple reducers'))
+store.dispatch(filterChange('ALL'))
+store.dispatch(createNote('combineReducers creates one reducer from many simple reducers'))
 
 export default store
 
