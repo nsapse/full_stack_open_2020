@@ -1,5 +1,5 @@
 import React, { useEffect }from 'react'
-import AnecdoteForm from './components/AnecdoteForm'
+import AnecdoteForm from './components/anecdoteForm'
 import AnecdoteList from './components/AnecdoteList'
 import Notification from './components/Notification'
 import Filter from './components/Filter'

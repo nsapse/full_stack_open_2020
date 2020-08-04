@@ -1,3 +1,5 @@
+import noteService from '../services/notes'
+
 const noteReducer = (state = [], action) => {
   console.log('ACTION', action)
   switch (action.type) {
@@ -14,22 +16,27 @@ const noteReducer = (state = [], action) => {
         note.id !== id ? note : changedNote
       )
     }
+
     case 'INIT_NOTES':
       return action.data
+
     default:
       return state
   }
 } 
 
-const generateId = () => {
- const idNum = Number((Math.random() * 100000).toFixed())
- return idNum
-}
+// const generateId = () => {
+//  const idNum = Number((Math.random() * 100000).toFixed())
+//  return idNum
+// }
 
-export const initializeNotes = (notes) => {
-  return {
-    type: 'INIT_NOTES',
-    data: notes,
+export const initializeNotes = () => {
+  return async dispatch => {
+    const notes = await noteService.getAll()
+    dispatch({
+      type: 'INIT_NOTES',
+      data: notes,
+    })
   }
 }
 
@@ -37,7 +44,7 @@ export const initializeNotes = (notes) => {
 export const createNote = (content) => {
   return {
     type: 'NEW_NOTE',
-    data, 
+    content, 
   }
 }
 

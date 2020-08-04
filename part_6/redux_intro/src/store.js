@@ -1,12 +1,20 @@
-const counterReducer = (state, action) => {
-    switch (action.type) {
-        case 'INCREMENT':
-            return state + 1
-        case 'DECREMENT':
-            return state -1 
-        case 'ZERO'
-            return 0
-        default:
-            return state;
-    }
-}
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension' 
+import thunk from 'redux-thunk'
+
+import noteReducer from './reducers/noteReducer'
+import filterReducer from './reducers/filterReducer'
+
+const reducer = combineReducers({
+		notes: notkReducer,
+		filter: filterReducer,
+})
+
+const store = createStore(
+	reducer,
+	composeWithDevTools(
+		applyMiddleware(thunk)
+	)
+)
+
+export default store
